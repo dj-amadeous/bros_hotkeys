@@ -2,6 +2,7 @@ import window_utils as wu
 import main_threads as mt
 import threading
 import time
+import sys
 
 if __name__ == "__main__":
     wu.setup_emulator_window_main()
@@ -14,6 +15,4 @@ if __name__ == "__main__":
         time.sleep(1)
         print("working")
 
-    print("a")
-    print("b")
-    hotkey_thread.terminate()
+    sys.exit(0)
