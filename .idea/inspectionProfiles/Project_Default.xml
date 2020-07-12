@@ -1,0 +1,26 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="global_config" />
+          <option value="gui_main" />
+          <option value="json_utils" />
+          <option value="logger_main" />
+          <option value="resizable_window_tabs" />
+          <option value="text_handlers" />
+          <option value="start_handlers" />
+          <option value="rakeback_main" />
+          <option value="Qt_ui" />
+          <option value="image_utils" />
+          <option value="license_checker" />
+          <option value="sleep_utils" />
+          <option value="spreadsheet_utils" />
+          <option value="text_utils" />
+          <option value="window_utils" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
