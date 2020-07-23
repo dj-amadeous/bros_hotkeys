@@ -71,24 +71,27 @@ class ThreadKiller:
 
 class HotkeyListener:
     def __init__(self, event):
+        self.paused = False
         self.event = event
-        self.coord_list_left = [(54, 61), (163, 61), (271, 63), (379, 63)]
-        self.coord_list_right = [(499, 63), (605, 63), (712, 63), (818, 63)]
-        self.left_table_actions = []
-        self.right_table_fold = (516, 772)
-        self.right_table_check_call = (660, 770)
-        self.right_table_bet = (809, 767)
-        self.right_table_pot = (715, 765)
-        self.right_table_66_pot = (604, 765)
-        self.right_table_half_pot = (500, 770)
-        self.right_table_add_table = (480, 113)
-        self.left_table_fold = (76, 770)
-        self.left_table_bet = (375, 770)
-        self.left_table_check_call = (216, 771)
-        self.left_table_pot = (260, 768)
-        self.left_table_66_pot = (162, 771)
-        self.left_table_half_pot = (57, 771)
-        self.left_table_add_table = (41, 118)
+        self.coord_list_left = [(72, 77), (212, 77), (347, 77), (491, 77)]
+        self.coord_list_right = [(631, 77), (767, 77), (908, 77), (1048, 77)]
+        self.right_table_fold = (656, 998)
+        self.right_table_check_call = (833, 997)
+        self.right_table_bet = (1040, 997)
+        self.right_table_pot = (894, 997)
+        self.right_table_66_pot = (764, 997)
+        self.right_table_half_pot = (627, 997)
+        self.left_table_fold = (101, 996)
+        self.left_table_bet = (476, 997)
+        self.left_table_check_call = (276, 997)
+        self.left_table_pot = (340, 997)
+        self.left_table_66_pot = (202, 997)
+        self.left_table_half_pot = (66, 997)
+
+        self.left_table_cancel = (169, 628)
+        self.right_table_cancel = (734, 629)
+        self.left_table_time = (46, 853)
+        self.right_table_time = (607, 855)
         self.left_table = None
 
     def on_press(self, key):
@@ -96,64 +99,74 @@ class HotkeyListener:
 
     def on_release(self, key):
         try:
-            if key == Key.space:
-                if self.left_table:
-                    handle_click_by_xy(self.left_table_bet[0], self.left_table_bet[1])
+            if key.char == 'p':
+                if self.paused:
+                    self.paused = False
                 else:
-                    handle_click_by_xy(self.right_table_bet[0], self.right_table_bet[1])
-            elif key.char == 'q':
-                handle_click_by_xy(self.coord_list_right[0][0], self.coord_list_right[0][1])
-                self.left_table = False
-            elif key.char == 'w':
-                handle_click_by_xy(self.coord_list_right[1][0], self.coord_list_right[1][1])
-                self.left_table = False
-            elif key.char == 'e':
-                handle_click_by_xy(self.coord_list_right[2][0], self.coord_list_right[2][1])
-                self.left_table = False
-            elif key.char == 'r':
-                handle_click_by_xy(self.coord_list_right[3][0], self.coord_list_right[3][1])
-                self.left_table = False
-            elif key.char == '1':
-                handle_click_by_xy(self.coord_list_left[0][0], self.coord_list_left[0][1])
-                self.left_table = True
-            elif key.char == '2':
-                handle_click_by_xy(self.coord_list_left[1][0], self.coord_list_left[1][1])
-                self.left_table = True
-            elif key.char == '3':
-                handle_click_by_xy(self.coord_list_left[2][0], self.coord_list_left[2][1])
-                self.left_table = True
-            elif key.char == '4':
-                handle_click_by_xy(self.coord_list_left[3][0], self.coord_list_left[3][1])
-                self.left_table = True
-
-            elif key.char == '5':
-                if self.left_table:
-                    handle_click_by_xy(self.left_table_half_pot[0], self.left_table_half_pot[1])
-                else:
-                    handle_click_by_xy(self.right_table_half_pot[0], self.right_table_half_pot[1])
-            elif key.char == 't':
-                if self.left_table:
-                    handle_click_by_xy(self.left_table_66_pot[0], self.left_table_66_pot[1])
-                else:
-                    handle_click_by_xy(self.right_table_66_pot[0], self.right_table_66_pot[1])
-            elif key.char == 'g':
-                if self.left_table:
-                    handle_click_by_xy(self.left_table_pot[0], self.left_table_pot[1])
-                else:
-                    handle_click_by_xy(self.right_table_pot[0], self.right_table_pot[1])
-            elif key.char == 'd':
-                if self.left_table:
-                    handle_click_by_xy(self.left_table_check_call[0], self.left_table_check_call[1])
-                else:
-                    handle_click_by_xy(self.right_table_check_call[0], self.right_table_check_call[1])
-            elif key.char == 'f':
-                if self.left_table:
-                    handle_click_by_xy(self.left_table_fold[0], self.left_table_fold[1])
-                else:
-                    handle_click_by_xy(self.right_table_fold[0], self.right_table_fold[1])
-            elif key.char == 'p':
-                self.event.set()
-                return False
+                    self.paused = True
+            if not self.paused:
+                if key == Key.space:
+                    if self.left_table:
+                        handle_click_by_xy(self.left_table_bet[0], self.left_table_bet[1])
+                    else:
+                        handle_click_by_xy(self.right_table_bet[0], self.right_table_bet[1])
+                elif key.char == 'q':
+                    handle_click_by_xy(self.coord_list_right[0][0], self.coord_list_right[0][1])
+                    self.left_table = False
+                elif key.char == 'w':
+                    handle_click_by_xy(self.coord_list_right[1][0], self.coord_list_right[1][1])
+                    self.left_table = False
+                elif key.char == 'e':
+                    handle_click_by_xy(self.coord_list_right[2][0], self.coord_list_right[2][1])
+                    self.left_table = False
+                elif key.char == 'r':
+                    handle_click_by_xy(self.coord_list_right[3][0], self.coord_list_right[3][1])
+                    self.left_table = False
+                elif key.char == '1':
+                    handle_click_by_xy(self.coord_list_left[0][0], self.coord_list_left[0][1])
+                    self.left_table = True
+                elif key.char == '2':
+                    handle_click_by_xy(self.coord_list_left[1][0], self.coord_list_left[1][1])
+                    self.left_table = True
+                elif key.char == '3':
+                    handle_click_by_xy(self.coord_list_left[2][0], self.coord_list_left[2][1])
+                    self.left_table = True
+                elif key.char == '4':
+                    handle_click_by_xy(self.coord_list_left[3][0], self.coord_list_left[3][1])
+                    self.left_table = True
+                elif key.char == '5':
+                    if self.left_table:
+                        handle_click_by_xy(self.left_table_half_pot[0], self.left_table_half_pot[1])
+                    else:
+                        handle_click_by_xy(self.right_table_half_pot[0], self.right_table_half_pot[1])
+                elif key.char == 't':
+                    if self.left_table:
+                        handle_click_by_xy(self.left_table_66_pot[0], self.left_table_66_pot[1])
+                    else:
+                        handle_click_by_xy(self.right_table_66_pot[0], self.right_table_66_pot[1])
+                elif key.char == 'g':
+                    if self.left_table:
+                        handle_click_by_xy(self.left_table_pot[0], self.left_table_pot[1])
+                    else:
+                        handle_click_by_xy(self.right_table_pot[0], self.right_table_pot[1])
+                elif key.char == 'd':
+                    if self.left_table:
+                        handle_click_by_xy(self.left_table_check_call[0], self.left_table_check_call[1])
+                    else:
+                        handle_click_by_xy(self.right_table_check_call[0], self.right_table_check_call[1])
+                elif key.char == 'f':
+                    if self.left_table:
+                        handle_click_by_xy(self.left_table_fold[0], self.left_table_fold[1])
+                    else:
+                        handle_click_by_xy(self.right_table_fold[0], self.right_table_fold[1])
+                elif key.char == 'l':
+                    self.event.set()
+                    return False
+                elif key.char == 's':
+                    if self.left_table:
+                        handle_click_by_xy(self.left_table_time[0], self.left_table_time[1])
+                    else:
+                        handle_click_by_xy(self.right_table_time[0], self.right_table_time[1])
         except Exception as e:
             print(e)
 

@@ -22,8 +22,8 @@ def fake_resize_and_move_window(window_title, window_width, window_height, windo
 
 def setup_emulator_window_main():
     emulators = ["window_1", "window_2"]
-    width = 440
-    height = 800
+    width = 560
+    height = 1040
 
     try:
         i = 0
